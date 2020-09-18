@@ -1,4 +1,19 @@
 .hero-image{
     background-image: url('./Assets/Pizza.jpg');
     height:80vh;
+    text-align: center;
+}
+
+.link {
+    font-size: 2rem;
+    text-decoration: none;
+    color:white;
+    background:black;
+    transition:.25s;
+}
+
+.link:hover{
+    background:white;
+    color:black;
+    transition:.25s;
 }

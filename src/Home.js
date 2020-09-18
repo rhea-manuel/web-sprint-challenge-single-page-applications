@@ -6,7 +6,7 @@ export default function Home({click}) {
     return (
         <div class="hero-image"> 
         <h2>Your favorite food, delivered while coding.</h2>
-        <Link to={'/pizza'}>Pizza?</Link>
+        <Link class="link" to={'/pizza'}>Pizza?</Link>
         </div>
     )
 }
