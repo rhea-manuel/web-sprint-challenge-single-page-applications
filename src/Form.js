@@ -117,8 +117,8 @@ export default function Form({ pizzas, changePizzas }) {
 
                 </Route>
 
-                {page === 'Form' ? <Link to={'/pizza/options'} onClick={() => changePage('Toppings')}>Choose toppings</Link> : <Link to={'/pizza'} onClick={() => changePage('Form')}>Go back</Link>}
-                
+                {page === 'Form' ? <Link id="goToToppings"to={'/pizza/options'} onClick={() => changePage('Toppings')}>Choose toppings</Link> : <Link id="goBack" to={'/pizza'} onClick={() => changePage('Form')}>Go back</Link>}
+
                 <Route path="/pizza/options">
                     <FoodOptions formData={formData} topping={topping} toppings={toppings}></FoodOptions>
                     <Size change={change}></Size>
