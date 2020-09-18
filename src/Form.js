@@ -2,6 +2,7 @@ import Axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import * as Yup from 'yup'
 import './Styles.css'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 import Name from './Components/Name'
 import FoodOptions from './Components/FoodOptions'
@@ -12,6 +13,7 @@ import Instructions from './Components/Instructions'
 export default function Form({ pizzas, changePizzas }) {
 
     const toppings = ['Pepperoni', 'Sausage', 'Canadian Bacon', 'Spicy Italian Sausage']
+    const [page, changePage] = useState('Form')
 
     const [formData, changeData] = useState({
         name: '',
@@ -101,13 +103,34 @@ export default function Form({ pizzas, changePizzas }) {
     return (
         <div>
             <form onSubmit={submit} >
-                <Name formData={formData} change={change} errors={errors}></Name>
 
-                <FoodOptions formData={formData} topping={topping} toppings={toppings}></FoodOptions>
-                <Size change={change}></Size>
+                {/* <Route path="/">
 
-                <GlutenFree topping={topping}></GlutenFree>
-                <Instructions formData={formData} change={change} canSubmit={canSubmit}></Instructions>
+                    <Name formData={formData} change={change} errors={errors}></Name>
+
+                </Route> */}
+
+                <Route path="/pizza" exact>
+
+                    <Name formData={formData} change={change} errors={errors}></Name>
+                    <Instructions formData={formData} change={change} canSubmit={canSubmit}></Instructions>
+
+                </Route>
+
+                {page === 'Form' ? <Link to={'/pizza/options'} onClick={() => changePage('Toppings')}>Choose toppings</Link> : <Link to={'/pizza'} onClick={() => changePage('Form')}>Go back</Link>}
+                
+                <Route path="/pizza/options">
+                    <FoodOptions formData={formData} topping={topping} toppings={toppings}></FoodOptions>
+                    <Size change={change}></Size>
+                    <GlutenFree topping={topping}></GlutenFree>
+                    
+                </Route>
+
+
+
+                
+
+
             </form>
         </div>
     )
