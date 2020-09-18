@@ -11,6 +11,7 @@ export default function Form({ pizzas, changePizzas }) {
         size: '',
         'Pepperoni': false, 'Sausage': false, 'Canadian Bacon': false, 'Spicy Italian Sausage': false,
         specialInstructions: '',
+        glutenFree: false
     })
 
     // The errors have to have the same keys as the data, so I just spread it.
@@ -45,7 +46,7 @@ export default function Form({ pizzas, changePizzas }) {
     //             return
     //         }
     //     })
-        
+
     //     submitPermission(true)
     //     // schema.isValid(formData).then(valid => {
     //     //     submitPermission(!valid)
@@ -69,7 +70,7 @@ export default function Form({ pizzas, changePizzas }) {
     const change = (event) => {
 
         event.persist()
-        
+
         if (event.target.name === 'name' || event.target.name === 'size') {
             checkValid(event.target.name, event.target.value)
         }
@@ -149,7 +150,9 @@ export default function Form({ pizzas, changePizzas }) {
                         )
                     }
                     )
+                    // < label > G
                 }
+
 
                 <br></br>
                 <label>
@@ -161,6 +164,8 @@ export default function Form({ pizzas, changePizzas }) {
                         <option>large</option>
                     </select>
                 </label>
+
+                <label>Gluten Free? <input type="checkbox" name="glutenFree" onChange={topping}></input></label>
 
                 <br></br>
                 <label for="specialInstructions" >Name</label>
