@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import Home from './Home'
 import Form from './Form'
+import ToggleSwitch from './ToggleSwitch'
 import Axios from 'axios'
 
 const App = () => {
@@ -43,6 +44,10 @@ const App = () => {
                   if (item==='id' || item==='createdAt'){
                     return
                   }
+
+                  // if (item==='glutenFree'){
+                  //   return(<ToggleSwitch enabled={FormData.}/>)
+                  // }
 
                   if (item != 'name' && item != 'size' && item != 'specialInstructions') {
 

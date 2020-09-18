@@ -1,6 +1,13 @@
 import Axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import * as Yup from 'yup'
+import './Styles.css'
+
+import Name from './Components/Name'
+import FoodOptions from './Components/FoodOptions'
+import Size from './Components/Size'
+import GlutenFree from './Components/GlutenFree'
+import Instructions from './Components/Instructions'
 
 export default function Form({ pizzas, changePizzas }) {
 
@@ -36,34 +43,7 @@ export default function Form({ pizzas, changePizzas }) {
             submitPermission(!valid)
         })
     }, [formData])
-    // useEffect(() => {
-    //     console.log(errors)
-    //     const values = Object.values(errors)
 
-    //     values.forEach(element => {
-    //         if (element===''){
-    //             submitPermission(false)
-    //             return
-    //         }
-    //     })
-
-    //     submitPermission(true)
-    //     // schema.isValid(formData).then(valid => {
-    //     //     submitPermission(!valid)
-    //     // })
-    // }, [errors])
-
-    // let defaultState = {};
-
-    // toppings.forEach((item)=>{
-
-    //     defaultState = {
-    //         ...defaultState,
-    //         item
-    //     }
-    // })
-
-    // console.log(defaultState)
 
 
 
@@ -96,19 +76,8 @@ export default function Form({ pizzas, changePizzas }) {
 
     }
 
-    // const specialInstructions = (event) => {
-    //     const value = event.target.val()
-
-    //     changeData({
-
-    //         ...formData,
-    //         [event.target.name]: value
-    //     }
-    //     )
-    // }
-
     const topping = (event) => {
-        console.log(event.target.checked)
+        // console.log(event.target.checked)
         changeData({
             ...formData,
             [event.target.name]: event.target.checked
@@ -132,45 +101,13 @@ export default function Form({ pizzas, changePizzas }) {
     return (
         <div>
             <form onSubmit={submit} >
-                <label for="name" >Name</label>
-                <input id="name" name="name" value={formData.name} onChange={change}></input>
-                {errors.name.length > 0 ? (<span>{errors.name}</span>) : null}
-                <br></br>
-                <label>Toppings</label>
-                <br></br>
-                {
-                    toppings.map((item) => {
+                <Name formData={formData} change={change} errors={errors}></Name>
 
-                        return (
-                            <label>
-                                {item}
-                                <input class="topping" value={formData.item} name={item} type="checkbox" onChange={topping}></input>
-                                <br></br>
-                            </label>
-                        )
-                    }
-                    )
-                    // < label > G
-                }
+                <FoodOptions formData={formData} topping={topping} toppings={toppings}></FoodOptions>
+                <Size change={change}></Size>
 
-
-                <br></br>
-                <label>
-                    Pizza Size
-                    <select name="size" onChange={change}>
-                        <option selected disabled hidden value="">Choose a Size</option>
-                        <option>small</option>
-                        <option>medium</option>
-                        <option>large</option>
-                    </select>
-                </label>
-
-                <label>Gluten Free? <input type="checkbox" name="glutenFree" onChange={topping}></input></label>
-
-                <br></br>
-                <label for="specialInstructions" >Name</label>
-                <textarea id="specialInstructions" name="specialInstructions" value={formData.specialInstructions} onChange={change}></textarea>
-                <button disabled={canSubmit}>Add to order</button>
+                <GlutenFree topping={topping}></GlutenFree>
+                <Instructions formData={formData} change={change} canSubmit={canSubmit}></Instructions>
             </form>
         </div>
     )
